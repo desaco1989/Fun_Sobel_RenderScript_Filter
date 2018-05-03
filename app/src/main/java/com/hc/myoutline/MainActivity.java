@@ -12,6 +12,10 @@ import com.hc.myoutline.sobel.CommenUtils;
 import com.hc.myoutline.sobel.DrawOutlineView;
 import com.hc.myoutline.sobel.SobelUtils;
 
+/**
+ * 图片的RGB计算，
+ * 遍历每个像素计算与GPU并行计算
+ */
 public class MainActivity extends AppCompatActivity {
     private DrawOutlineView drawOutlineView;
     private Bitmap sobelBm;
@@ -39,7 +43,19 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        //jump_sobel_rs
+        findViewById(R.id.jump_sobel_rs).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //
+                Intent intent = new Intent();
+                //RenderScriptActivity
+                intent.setClass(MainActivity.this,SobelRenderActivity.class);
+                startActivity(intent);
+            }
+        });
     }
+
     //根据Bitmap信息，获取每个位置的像素点是否需要绘制
     //使用boolean数组而不是int[][]主要是考虑到内存的消耗
     private boolean[][] getArray(Bitmap bitmap) {
